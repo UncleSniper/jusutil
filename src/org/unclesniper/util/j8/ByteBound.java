@@ -3,22 +3,22 @@ package org.unclesniper.util.j8;
 import org.unclesniper.util.OrderRelation;
 import org.unclesniper.util.OMGWereDoomedError;
 
-public class IntBound implements IntP {
+public class ByteBound implements ByteP {
 
-	private int threshold;
+	private byte threshold;
 
 	private OrderRelation relation;
 
-	public IntBound(int threshold, OrderRelation relation) {
+	public ByteBound(byte threshold, OrderRelation relation) {
 		this.threshold = threshold;
 		this.relation = relation;
 	}
 
-	public int getThreshold() {
+	public byte getThreshold() {
 		return threshold;
 	}
 
-	public void setThreshold(int threshold) {
+	public void setThreshold(byte threshold) {
 		this.threshold = threshold;
 	}
 
@@ -31,7 +31,7 @@ public class IntBound implements IntP {
 	}
 
 	@Override
-	public boolean testInt(int value) {
+	public boolean testByte(byte value) {
 		switch(relation) {
 			case LT:
 				return value < threshold;
