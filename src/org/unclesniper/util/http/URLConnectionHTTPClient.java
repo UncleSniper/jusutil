@@ -21,8 +21,13 @@ public class URLConnectionHTTPClient extends AbstractHTTPClient {
 
 		@Override
 		public HTTPResponse request() throws IOException {
-			HttpURLConnection conn = (HttpURLConnection)new URL(getRequestURL())
-					.openConnection(URLConnectionHTTPClient.makeProxy(getProxy()));
+			URL url = new URL(getRequestURL());
+			Proxy proxy = URLConnectionHTTPClient.makeProxy(getProxy());
+			HttpURLConnection conn;
+			if(proxy == null)
+				conn = (HttpURLConnection)url.openConnection();
+			else
+				conn = (HttpURLConnection)url.openConnection(proxy);
 			conn.setRequestMethod(getVerb().toString());
 			setRequestHeaders(conn::setRequestProperty);
 			InputStream body = getRequestBody();
