@@ -1,5 +1,7 @@
 package org.unclesniper.util;
 
+import java.io.Reader;
+import java.io.Writer;
 import java.io.InputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -15,6 +17,21 @@ public final class IOUtils {
 		notNull(out, "out");
 		long all = 0L;
 		byte[] buffer = new byte[512];
+		for(;;) {
+			int count = in.read(buffer);
+			if(count <= 0)
+				break;
+			out.write(buffer, 0, count);
+			all += count;
+		}
+		return all;
+	}
+
+	public static long copy(Reader in, Writer out) throws IOException {
+		notNull(in, "in");
+		notNull(out, "out");
+		long all = 0L;
+		char[] buffer = new char[512];
 		for(;;) {
 			int count = in.read(buffer);
 			if(count <= 0)
