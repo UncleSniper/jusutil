@@ -5,13 +5,10 @@ import java.net.Proxy;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.StringWriter;
-import java.io.InputStreamReader;
 import java.net.InetSocketAddress;
 import java.net.HttpURLConnection;
 import org.unclesniper.util.IOUtils;
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.nio.charset.StandardCharsets;
 
 import static org.unclesniper.util.ArgUtils.notNull;
@@ -38,14 +35,9 @@ public class URLConnectionHTTPClient extends AbstractHTTPClient {
 			InputStream body = getRequestBody();
 			if(body != null) {
 				if(HTTPDebug.DEBUG_ON) {
-					ByteArrayOutputStream baos = new ByteArrayOutputStream();
-					IOUtils.copy(body, baos);
-					byte[] bodyBytes = baos.toByteArray();
-					InputStreamReader isr = new InputStreamReader(new ByteArrayInputStream(bodyBytes),
-							StandardCharsets.ISO_8859_1);
-					StringWriter sw = new StringWriter();
-					IOUtils.copy(isr, sw);
-					System.err.println("*** HTTP request #" + requestID + ": Setting body to: " + sw);
+					byte[] bodyBytes = IOUtils.toByteArray(body);
+					System.err.println("*** HTTP request #" + requestID + ": Setting body to: "
+							+ IOUtils.toString(bodyBytes, StandardCharsets.ISO_8859_1));
 					body = new ByteArrayInputStream(bodyBytes);
 				}
 				conn.setDoOutput(true);
