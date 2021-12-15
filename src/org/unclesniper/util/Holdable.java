@@ -2,7 +2,6 @@ package org.unclesniper.util;
 
 import static org.unclesniper.util.ArgUtils.notNull;
 
-@FunctionalInterface
 public interface Holdable<ReleaseExceptionT extends Exception> extends AutoCloseable {
 
 	@Override
@@ -13,9 +12,10 @@ public interface Holdable<ReleaseExceptionT extends Exception> extends AutoClose
 		Executable<? extends ExecuteExceptionT> action,
 		Iterable<? extends Holdable<? extends ReleaseExceptionT>> resources
 	) throws ExecuteExceptionT, ReleaseExceptionT {
+		notNull(action, "action");
 		Throwable ee = null;
 		try {
-			notNull(action, "action").execute();
+			action.execute();
 		}
 		catch(Throwable t) {
 			ee = t;
