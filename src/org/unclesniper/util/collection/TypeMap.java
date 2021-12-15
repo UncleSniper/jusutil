@@ -8,7 +8,8 @@ import static org.unclesniper.util.ArgUtils.notNull;
 
 public class TypeMap<UpperBoundT> {
 
-	private final Map<Class<?>, Object> bindings = new HashMap<Class<?>, Object>();
+	private final Map<Class<? extends UpperBoundT>, Object> bindings
+			= new HashMap<Class<? extends UpperBoundT>, Object>();
 
 	private boolean checkType;
 
@@ -22,7 +23,7 @@ public class TypeMap<UpperBoundT> {
 		this.checkType = checkType;
 	}
 
-	public <T> void put(Class<T> type, T instance) {
+	public <T extends UpperBoundT> void put(Class<T> type, T instance) {
 		notNull(type, "type");
 		if(checkType && instance != null && !type.isInstance(instance))
 			throw new IllegalArgumentException("Instance object of type '" + instance.getClass().getName()
@@ -34,7 +35,7 @@ public class TypeMap<UpperBoundT> {
 	}
 
 	@SuppressWarnings("unchecked")
-	public <T> T get(Class<T> type) {
+	public <T extends UpperBoundT> T get(Class<T> type) {
 		return (T)bindings.get(type);
 	}
 
@@ -42,11 +43,11 @@ public class TypeMap<UpperBoundT> {
 		bindings.clear();
 	}
 
-	public Set<Class<?>> keySet() {
+	public Set<Class<? extends UpperBoundT>> keySet() {
 		return bindings.keySet();
 	}
 
-	public boolean remove(Class<?> type) {
+	public boolean remove(Class<? extends UpperBoundT> type) {
 		return bindings.remove(type) != null;
 	}
 
