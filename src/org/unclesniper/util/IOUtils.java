@@ -94,4 +94,19 @@ public final class IOUtils {
 		return charset == null ? StandardCharsets.ISO_8859_1 : charset;
 	}
 
+	public static InputStream getResourceAsStream(Class<?> clazz, String path) {
+		InputStream is = notNull(clazz, "clazz").getResourceAsStream(notNull(path, "path"));
+		if(is == null)
+			throw new IllegalStateException("Resource is missing: " + path);
+		return is;
+	}
+
+	public static String getResourceAsString(Class<?> clazz, String path, String charset) throws IOException {
+		return IOUtils.toString(IOUtils.getResourceAsStream(clazz, path), charset);
+	}
+
+	public static String getResourceAsString(Class<?> clazz, String path, Charset charset) throws IOException {
+		return IOUtils.toString(IOUtils.getResourceAsStream(clazz, path), charset);
+	}
+
 }
