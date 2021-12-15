@@ -2,6 +2,7 @@ package org.unclesniper.util;
 
 import static org.unclesniper.util.ArgUtils.notNull;
 
+@FunctionalInterface
 public interface Holdable<ReleaseExceptionT extends Exception> extends AutoCloseable {
 
 	@Override
