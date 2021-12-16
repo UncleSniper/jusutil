@@ -21,6 +21,14 @@ public class SimpleDynamicServiceProvider<UpperBoundT, ContextT, ProvisionExcept
 		services.setCheckType(checkType);
 	}
 
+	public Class<UpperBoundT> getUpperBoundClass() {
+		return services.getUpperBoundClass();
+	}
+
+	public void setUpperBoundClass(Class<UpperBoundT> upperBoundClass) {
+		services.setUpperBoundClass(upperBoundClass);
+	}
+
 	public <ServiceT extends UpperBoundT> void setService(Class<ServiceT> type, ServiceT instance) {
 		services.put(type, instance);
 	}
