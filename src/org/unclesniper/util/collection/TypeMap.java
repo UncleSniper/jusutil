@@ -13,6 +13,8 @@ public class TypeMap<UpperBoundT> {
 
 	private boolean checkType;
 
+	private Class<UpperBoundT> upperBoundClass;
+
 	public TypeMap() {}
 
 	public boolean isCheckType() {
@@ -23,8 +25,19 @@ public class TypeMap<UpperBoundT> {
 		this.checkType = checkType;
 	}
 
+	public Class<UpperBoundT> getUpperBoundClass() {
+		return upperBoundClass;
+	}
+
+	public void setUpperBoundClass(Class<UpperBoundT> upperBoundClass) {
+		this.upperBoundClass = upperBoundClass;
+	}
+
 	public <T extends UpperBoundT> void put(Class<T> type, T instance) {
 		notNull(type, "type");
+		if(upperBoundClass != null && !upperBoundClass.isAssignableFrom(type))
+			throw new IllegalArgumentException("Type '" + type.getName() + "' does not conform to upper bound '"
+					+ upperBoundClass.getName() + '\'');
 		if(checkType && instance != null && !type.isInstance(instance))
 			throw new IllegalArgumentException("Instance object of type '" + instance.getClass().getName()
 					+ "' is not actually of claimed type '" + type.getName() + '\'');
