@@ -17,6 +17,7 @@ public class FlatteningIterable<OuterT, InnerT> implements Iterable<InnerT> {
 		this.iterateInner = notNull(iterateInner, "iterateInner");
 	}
 
+	@Override
 	public Iterator<InnerT> iterator() {
 		return new FlatteningIterator<OuterT, InnerT>(outerIterable.iterator(), iterateInner);
 	}
