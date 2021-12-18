@@ -28,11 +28,14 @@ public interface ContextInstantiableService<ContextT, InstanceT, InstantiationEx
 		Executable<? extends ExecuteExceptionT> action,
 		Iterable<? extends ServiceT> services,
 		ContextT context,
-		ServicePlacement<? super ServiceT, ? super InstanceT, ? extends AssignmentExceptionT> placement
+		ContextServicePlacement<
+			? super ServiceT,
+			? super ContextT,
+			? super InstanceT,
+			? extends AssignmentExceptionT
+		> placement
 	) throws ExecuteExceptionT, ReleaseExceptionT, InstantiationExceptionT, AssignmentExceptionT {
 		notNull(action, "action");
-		if(services != null)
-			notNull(placement, "placement");
 		Throwable ee = null;
 		List<InstanceT> instances = null;
 		if(services != null) {
@@ -46,7 +49,7 @@ public interface ContextInstantiableService<ContextT, InstanceT, InstantiationEx
 							instances = new LinkedList<InstanceT>();
 						instances.add(instance);
 						if(placement != null)
-							placement.assignServiceInstance(service, instance);
+							placement.assignServiceInstance(service, context, instance);
 					}
 				}
 			}
