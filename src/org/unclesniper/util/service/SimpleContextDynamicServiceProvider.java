@@ -23,7 +23,7 @@ public class SimpleContextDynamicServiceProvider<UpperBoundT, ContextT, Provisio
 	public SimpleContextDynamicServiceProvider(
 		Supplier<? extends Map<? super ContextT, Object>> contextMapConstructor
 	) {
-		this.contextMapConstructor = notNull(contextMapConstructor, "contextMapConstructor");
+		this.contextMapConstructor = contextMapConstructor == null ? HashMap::new : contextMapConstructor;
 	}
 
 	public Supplier<? extends Map<? super ContextT, Object>> getContextMapConstructor() {
