@@ -1,0 +1,110 @@
+package org.unclesniper.util.service;
+
+import java.util.Map;
+import java.util.Set;
+import java.util.HashMap;
+import java.util.function.Supplier;
+
+import static org.unclesniper.util.ArgUtils.notNull;
+
+public class SimpleContextDynamicServiceProvider<UpperBoundT, ContextT, ProvisionExceptionT extends Throwable>
+		implements DynamicServiceProvider<UpperBoundT, ProvisionExceptionT>,
+		ContextDynamicServiceProvider<UpperBoundT, ContextT, ProvisionExceptionT> {
+
+	private final Supplier<? extends Map<? super ContextT, Object>> contextMapConstructor;
+
+	private final Map<Class<? extends UpperBoundT>, Map<? super ContextT, Object>> services
+			= new HashMap<Class<? extends UpperBoundT>, Map<? super ContextT, Object>>();
+
+	private boolean checkType;
+
+	private Class<UpperBoundT> upperBoundClass;
+
+	public SimpleContextDynamicServiceProvider(
+		Supplier<? extends Map<? super ContextT, Object>> contextMapConstructor
+	) {
+		this.contextMapConstructor = notNull(contextMapConstructor, "contextMapConstructor");
+	}
+
+	public Supplier<? extends Map<? super ContextT, Object>> getContextMapConstructor() {
+		return contextMapConstructor;
+	}
+
+	public boolean isCheckType() {
+		return checkType;
+	}
+
+	public void setCheckType(boolean checkType) {
+		this.checkType = checkType;
+	}
+
+	public Class<UpperBoundT> getUpperBoundClass() {
+		return upperBoundClass;
+	}
+
+	public void setUpperBoundClass(Class<UpperBoundT> upperBoundClass) {
+		this.upperBoundClass = upperBoundClass;
+	}
+
+	public <ServiceT extends UpperBoundT> void setService(Class<ServiceT> type, ContextT context,
+			ServiceT instance) {
+		notNull(type, "type");
+		if(upperBoundClass != null && !upperBoundClass.isAssignableFrom(type))
+			throw new IllegalArgumentException("Type '" + type.getName() + "' does not conform to upper bound '"
+					+ upperBoundClass.getName() + '\'');
+		if(checkType && instance != null && !type.isInstance(instance))
+			throw new IllegalArgumentException("Instance object of type '" + instance.getClass().getName()
+					+ "' is not actually of claimed type '" + type.getName() + '\'');
+		Map<? super ContextT, Object> contextMap = services.get(type);
+		if(instance == null) {
+			if(contextMap != null)
+				contextMap.remove(context);
+			return;
+		}
+		if(contextMap == null) {
+			contextMap = contextMapConstructor.get();
+			if(contextMap == null)
+				throw new IllegalStateException("Context map constructor returned null");
+			services.put(type, contextMap);
+		}
+		contextMap.put(context, instance);
+	}
+
+	@Override
+	public <ServiceT extends UpperBoundT> ServiceT getService(Class<ServiceT> type) {
+		return getService(type, null);
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public <ServiceT extends UpperBoundT> ServiceT getService(Class<ServiceT> type, ContextT context) {
+		Map<? super ContextT, Object> contextMap = services.get(type);
+		if(contextMap == null)
+			return null;
+		return (ServiceT)contextMap.get(context);
+	}
+
+	public void clear() {
+		services.clear();
+	}
+
+	public Set<Class<? extends UpperBoundT>> serviceTypeSet() {
+		return services.keySet();
+	}
+
+	public boolean removeService(Class<? extends UpperBoundT> type) {
+		Map<? super ContextT, Object> contextMap = services.remove(type);
+		return contextMap != null && !contextMap.isEmpty();
+	}
+
+	public boolean removeService(Class<? extends UpperBoundT> type, ContextT context) {
+		Map<? super ContextT, Object> contextMap = services.get(type);
+		if(contextMap == null)
+			return false;
+		boolean removed = contextMap.remove(context) != null;
+		if(contextMap.isEmpty())
+			services.remove(type);
+		return removed;
+	}
+
+}
