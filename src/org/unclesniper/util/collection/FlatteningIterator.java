@@ -8,13 +8,13 @@ import static org.unclesniper.util.ArgUtils.notNull;
 
 public class FlatteningIterator<OuterT, InnerT> implements Iterator<InnerT> {
 
-	private final Iterator<OuterT> outerIterator;
+	private final Iterator<? extends OuterT> outerIterator;
 
 	private final Function<? super OuterT, ? extends Iterator<? extends InnerT>> iterate;
 
 	private Iterator<? extends InnerT> innerIterator;
 
-	public FlatteningIterator(Iterator<OuterT> outerIterator,
+	public FlatteningIterator(Iterator<? extends OuterT> outerIterator,
 			Function<? super OuterT, ? extends Iterator<? extends InnerT>> iterate) {
 		this.outerIterator = notNull(outerIterator, "outerIterator");
 		this.iterate = notNull(iterate, "iterate");
