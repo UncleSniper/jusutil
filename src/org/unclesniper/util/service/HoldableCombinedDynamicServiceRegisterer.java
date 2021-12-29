@@ -1,6 +1,5 @@
 package org.unclesniper.util.service;
 
-
 import java.util.function.Consumer;
 
 import static org.unclesniper.util.ArgUtils.notNull;
