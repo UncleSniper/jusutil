@@ -29,6 +29,11 @@ public class AdvancingDynamicServiceProvider<
 		? extends HoldableInstanceT,
 		? extends HoldableInstantiationExceptionT
 	>
+> implements CombinedDynamicServiceRegistry<
+	UnheldServiceT,
+	UnheldProvisionContextT,
+	HoldableServiceT,
+	HoldableProvisionContextT
 > {
 
 	private final SimpleContextDynamicServiceProvider<
@@ -99,11 +104,13 @@ public class AdvancingDynamicServiceProvider<
 		holdableServices.setUpperBoundClass(upperBoundClass);
 	}
 
+	@Override
 	public <ServiceT extends UnheldServiceT> void setUnheldService(Class<ServiceT> type,
 			UnheldProvisionContextT context, ServiceT instance) {
 		unheldServices.setService(type, context, instance);
 	}
 
+	@Override
 	public <ServiceT extends HoldableServiceT> void setHoldableService(Class<ServiceT> type,
 			HoldableProvisionContextT context, ServiceT instance) {
 		holdableServices.setService(type, context, instance);

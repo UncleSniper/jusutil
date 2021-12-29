@@ -12,7 +12,9 @@ import static org.unclesniper.util.ArgUtils.notNull;
 
 public class SimpleContextDynamicServiceProvider<UpperBoundT, ContextT, ProvisionExceptionT extends Throwable>
 		implements DynamicServiceProvider<UpperBoundT, ProvisionExceptionT>,
-		ContextDynamicServiceProvider<UpperBoundT, ContextT, ProvisionExceptionT> {
+		ContextDynamicServiceProvider<UpperBoundT, ContextT, ProvisionExceptionT>,
+		DynamicServiceRegistry<UpperBoundT>,
+		ContextDynamicServiceRegistry<UpperBoundT, ContextT> {
 
 	private final Supplier<? extends Map<? super ContextT, Object>> contextMapConstructor;
 
@@ -49,6 +51,7 @@ public class SimpleContextDynamicServiceProvider<UpperBoundT, ContextT, Provisio
 		this.upperBoundClass = upperBoundClass;
 	}
 
+	@Override
 	public <ServiceT extends UpperBoundT> void setService(Class<ServiceT> type, ContextT context,
 			ServiceT instance) {
 		notNull(type, "type");
@@ -71,6 +74,11 @@ public class SimpleContextDynamicServiceProvider<UpperBoundT, ContextT, Provisio
 			services.put(type, contextMap);
 		}
 		contextMap.put(context, instance);
+	}
+
+	@Override
+	public <ServiceT extends UpperBoundT> void setService(Class<ServiceT> type, ServiceT instance) {
+		setService(type, null, instance);
 	}
 
 	@Override
