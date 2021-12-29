@@ -13,6 +13,11 @@ public class ContextPair<ServiceT, ContextT> {
 		this.context = context;
 	}
 
+	public ContextPair(ContextPair<? extends ServiceT, ? extends ContextT> pair) {
+		service = notNull(pair, "pair").service;
+		context = pair.context;
+	}
+
 	public ServiceT getService() {
 		return service;
 	}

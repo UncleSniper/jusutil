@@ -14,6 +14,10 @@ public class InstantiableContextPair<
 		super(service, context);
 	}
 
+	public InstantiableContextPair(ContextPair<? extends ServiceT, ? extends PairContextT> pair) {
+		super(pair);
+	}
+
 	@Override
 	public InstanceT instantiate() throws InstantiationExceptionT {
 		return getService().instantiate();

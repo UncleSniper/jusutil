@@ -20,7 +20,7 @@ public class ContextInstantiableContextPair<
 	}
 
 	public ContextInstantiableContextPair(ContextPair<? extends ServiceT, ? extends PairContextT> pair) {
-		super(notNull(pair, "pair").getService(), pair.getContext());
+		super(pair);
 	}
 
 	@Override
