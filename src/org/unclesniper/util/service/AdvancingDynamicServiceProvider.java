@@ -238,10 +238,7 @@ public class AdvancingDynamicServiceProvider<
 		return getHoldableServiceInstance(type, provisionContext, instantiationContext, true);
 	}
 
-	public Iterable<Map.Entry<
-		Class<? extends UnheldServiceT>,
-		ContextPair<UnheldServiceT, UnheldProvisionContextT>
-	>> unheldEntries() {
+	public Iterable<ContextDynamicServiceEntry<? extends UnheldServiceT, UnheldProvisionContextT>> unheldEntries() {
 		return unheldServices.entries();
 	}
 
@@ -249,9 +246,9 @@ public class AdvancingDynamicServiceProvider<
 		return unheldServices.instances();
 	}
 
-	public Iterable<Map.Entry<
-		Class<? extends HoldableServiceT>,
-		ContextPair<HoldableServiceT, HoldableProvisionContextT>
+	public Iterable<ContextDynamicServiceEntry<
+		? extends HoldableServiceT,
+		HoldableProvisionContextT
 	>> holdableEntries() {
 		return holdableServices.entries();
 	}

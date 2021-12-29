@@ -119,23 +119,17 @@ public class SimpleContextDynamicServiceProvider<UpperBoundT, ContextT, Provisio
 	}
 
 	@SuppressWarnings("unchecked")
-	public Iterable<Map.Entry<Class<? extends UpperBoundT>, ContextPair<UpperBoundT, ContextT>>> entries() {
+	public Iterable<ContextDynamicServiceEntry<? extends UpperBoundT, ContextT>> entries() {
 		return new CoalescingIterable<
 			Map.Entry<Class<? extends UpperBoundT>, Map<? super ContextT, Object>>,
 			Class<? extends UpperBoundT>,
 			Map.Entry<? super ContextT, Object>,
-			Map.Entry<Class<? extends UpperBoundT>, ContextPair<UpperBoundT, ContextT>>
+			ContextDynamicServiceEntry<? extends UpperBoundT, ContextT>
 		>(
 			services.entrySet(),
 			Map.Entry::getKey,
 			entry -> entry.getValue().entrySet().iterator(),
-			(type, entry) -> new AbstractMap.SimpleImmutableEntry<
-				Class<? extends UpperBoundT>,
-				ContextPair<UpperBoundT, ContextT>
-			>(type, new ContextPair<UpperBoundT, ContextT>(
-				(UpperBoundT)entry.getValue(),
-				(ContextT)entry.getKey()
-			))
+			(type, entry) -> new ContextDynamicServiceEntry(type, entry.getValue(), entry.getKey())
 		);
 	}
 

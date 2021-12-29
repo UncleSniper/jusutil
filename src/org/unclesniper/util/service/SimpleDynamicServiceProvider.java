@@ -4,6 +4,7 @@ import java.util.Set;
 import java.util.Map;
 import java.util.Collection;
 import org.unclesniper.util.collection.TypeMap;
+import org.unclesniper.util.collection.MappingIterable;
 
 import static org.unclesniper.util.ArgUtils.notNull;
 
@@ -63,8 +64,17 @@ public class SimpleDynamicServiceProvider<UpperBoundT, ContextT, ProvisionExcept
 		return services.entrySet();
 	}
 
-	public Collection<Object> instances() {
-		return services.values();
+	@SuppressWarnings("unchecked")
+	public Iterable<DynamicServiceEntry<? extends UpperBoundT>> entries() {
+		return new MappingIterable<
+			Map.Entry<Class<? extends UpperBoundT>, Object>,
+			DynamicServiceEntry<? extends UpperBoundT>
+		>(services.entrySet(), entry -> new DynamicServiceEntry(entry.getKey(), entry.getValue()));
+	}
+
+	@SuppressWarnings("unchecked")
+	public Collection<? extends UpperBoundT> instances() {
+		return (Collection)services.values();
 	}
 
 }
