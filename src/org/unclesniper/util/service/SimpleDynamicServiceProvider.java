@@ -1,6 +1,8 @@
 package org.unclesniper.util.service;
 
 import java.util.Set;
+import java.util.Map;
+import java.util.Collection;
 import org.unclesniper.util.collection.TypeMap;
 
 import static org.unclesniper.util.ArgUtils.notNull;
@@ -53,6 +55,14 @@ public class SimpleDynamicServiceProvider<UpperBoundT, ContextT, ProvisionExcept
 
 	public boolean removeService(Class<? extends UpperBoundT> type) {
 		return services.remove(type);
+	}
+
+	public Set<Map.Entry<Class<? extends UpperBoundT>, Object>> entrySet() {
+		return services.entrySet();
+	}
+
+	public Collection<Object> instances() {
+		return services.values();
 	}
 
 }

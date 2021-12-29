@@ -3,6 +3,8 @@ package org.unclesniper.util.collection;
 import java.util.Map;
 import java.util.Set;
 import java.util.HashMap;
+import java.util.Collection;
+import java.util.Collections;
 
 import static org.unclesniper.util.ArgUtils.notNull;
 
@@ -62,6 +64,14 @@ public class TypeMap<UpperBoundT> {
 
 	public boolean remove(Class<? extends UpperBoundT> type) {
 		return bindings.remove(type) != null;
+	}
+
+	public Set<Map.Entry<Class<? extends UpperBoundT>, Object>> entrySet() {
+		return Collections.unmodifiableSet(bindings.entrySet());
+	}
+
+	public Collection<Object> values() {
+		return Collections.unmodifiableCollection(bindings.values());
 	}
 
 }

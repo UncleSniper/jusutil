@@ -3,7 +3,10 @@ package org.unclesniper.util.service;
 import java.util.Map;
 import java.util.Set;
 import java.util.HashMap;
+import java.util.AbstractMap;
 import java.util.function.Supplier;
+import org.unclesniper.util.collection.CollectionUtils;
+import org.unclesniper.util.collection.CoalescingIterable;
 
 import static org.unclesniper.util.ArgUtils.notNull;
 
@@ -105,6 +108,45 @@ public class SimpleContextDynamicServiceProvider<UpperBoundT, ContextT, Provisio
 		if(contextMap.isEmpty())
 			services.remove(type);
 		return removed;
+	}
+
+	@SuppressWarnings("unchecked")
+	public Iterable<Map.Entry<Class<? extends UpperBoundT>, ContextPair<UpperBoundT, ContextT>>> entries() {
+		return new CoalescingIterable<
+			Map.Entry<Class<? extends UpperBoundT>, Map<? super ContextT, Object>>,
+			Class<? extends UpperBoundT>,
+			Map.Entry<? super ContextT, Object>,
+			Map.Entry<Class<? extends UpperBoundT>, ContextPair<UpperBoundT, ContextT>>
+		>(
+			services.entrySet(),
+			Map.Entry::getKey,
+			entry -> entry.getValue().entrySet().iterator(),
+			(type, entry) -> new AbstractMap.SimpleImmutableEntry<
+				Class<? extends UpperBoundT>,
+				ContextPair<UpperBoundT, ContextT>
+			>(type, new ContextPair<UpperBoundT, ContextT>(
+				(UpperBoundT)entry.getValue(),
+				(ContextT)entry.getKey()
+			))
+		);
+	}
+
+	@SuppressWarnings("unchecked")
+	public Iterable<ContextPair<UpperBoundT, ContextT>> instances() {
+		return new CoalescingIterable<
+			Map<? super ContextT, Object>,
+			Void,
+			Map.Entry<? super ContextT, Object>,
+			ContextPair<UpperBoundT, ContextT>
+		>(
+			services.values(),
+			null,
+			CollectionUtils::iteratingEntries,
+			(cookie, entry) -> new ContextPair<UpperBoundT, ContextT>(
+				(UpperBoundT)entry.getValue(),
+				(ContextT)entry.getKey()
+			)
+		);
 	}
 
 }
