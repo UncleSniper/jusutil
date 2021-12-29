@@ -71,7 +71,7 @@ public class TypeMap<UpperBoundT> {
 	}
 
 	public Collection<Object> values() {
-		return Collections.unmodifiableCollection(bindings.values());
+		return bindings.values();
 	}
 
 }
