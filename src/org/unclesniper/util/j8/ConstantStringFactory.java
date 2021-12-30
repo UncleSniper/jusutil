@@ -1,5 +1,7 @@
 package org.unclesniper.util.j8;
 
+import java.util.Objects;
+
 public class ConstantStringFactory implements StringFactory {
 
 	private String value;
@@ -21,6 +23,18 @@ public class ConstantStringFactory implements StringFactory {
 	@Override
 	public String newObject() {
 		return value;
+	}
+
+	@Override
+	public int hashCode() {
+		return value == null ? 0 : value.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object other) {
+		if(!(other instanceof ConstantStringFactory))
+			return false;
+		return Objects.equals(value, ((ConstantStringFactory)other).value);
 	}
 
 }
