@@ -1,6 +1,7 @@
 package org.unclesniper.util.j8;
 
 import java.util.Objects;
+import org.unclesniper.util.HashUtils;
 
 public class ConstantStringFactory implements StringFactory {
 
@@ -27,7 +28,7 @@ public class ConstantStringFactory implements StringFactory {
 
 	@Override
 	public int hashCode() {
-		return value == null ? 0 : value.hashCode();
+		return HashUtils.hash(value);
 	}
 
 	@Override
