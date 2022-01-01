@@ -2,6 +2,7 @@ package org.unclesniper.util.j8;
 
 import java.util.Objects;
 import org.unclesniper.util.HashUtils;
+import org.unclesniper.util.EqualityUtils;
 
 public class ConstantStringFactory implements StringFactory {
 
@@ -33,9 +34,8 @@ public class ConstantStringFactory implements StringFactory {
 
 	@Override
 	public boolean equals(Object other) {
-		if(!(other instanceof ConstantStringFactory))
-			return false;
-		return Objects.equals(value, ((ConstantStringFactory)other).value);
+		ConstantStringFactory factory = EqualityUtils.compareTo(other, ConstantStringFactory.class);
+		return factory != null && Objects.equals(value, factory.value);
 	}
 
 }
