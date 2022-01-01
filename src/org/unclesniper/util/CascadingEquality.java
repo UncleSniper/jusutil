@@ -2,14 +2,17 @@ package org.unclesniper.util;
 
 public enum CascadingEquality {
 
-	EQUAL(true),
-	UNEQUAL(false),
-	UNKNOWN(true);
+	EQUAL(true, true),
+	UNEQUAL(false, true),
+	UNKNOWN(true, false);
 
 	public final boolean equal;
 
-	private CascadingEquality(boolean equal) {
+	public final boolean decided;
+
+	private CascadingEquality(boolean equal, boolean decided) {
 		this.equal = equal;
+		this.decided = decided;
 	}
 
 }

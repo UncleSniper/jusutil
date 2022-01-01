@@ -132,4 +132,98 @@ public final class EqualityUtils {
 		return a == b ? CascadingEquality.EQUAL : CascadingEquality.UNEQUAL;
 	}
 
+	// without condition: beginEqual = equal
+
+	public static CascadingEquality beginEqualIfBothPresent(CascadingEquality previous, Object a, Object b) {
+		if(previous == CascadingEquality.UNEQUAL)
+			return previous;
+		if(a == null || b == null)
+			return CascadingEquality.UNKNOWN;
+		return a.equals(b) ? CascadingEquality.EQUAL : CascadingEquality.UNEQUAL;
+	}
+
+	public static CascadingEquality beginEqualIfEitherPresent(CascadingEquality previous, Object a, Object b) {
+		if(previous == CascadingEquality.UNEQUAL)
+			return previous;
+		if(a == null)
+			return b == null ? CascadingEquality.UNKNOWN : CascadingEquality.UNEQUAL;
+		if(b == null)
+			return CascadingEquality.UNEQUAL;
+		return a.equals(b) ? CascadingEquality.EQUAL : CascadingEquality.UNEQUAL;
+	}
+
+	public static CascadingEquality endEqual(CascadingEquality previous, Object a, Object b) {
+		if(previous != null && previous.decided)
+			return previous;
+		if(a == null)
+			return b == null ? CascadingEquality.EQUAL : CascadingEquality.UNEQUAL;
+		if(b == null)
+			return CascadingEquality.UNEQUAL;
+		return a.equals(b) ? CascadingEquality.EQUAL : CascadingEquality.UNEQUAL;
+	}
+
+	public static CascadingEquality endEqualIfBothPresent(CascadingEquality previous, Object a, Object b) {
+		if(previous != null && previous.decided)
+			return previous;
+		if(a == null || b == null)
+			return CascadingEquality.UNKNOWN;
+		return a.equals(b) ? CascadingEquality.EQUAL : CascadingEquality.UNEQUAL;
+	}
+
+	public static CascadingEquality endEqualIfEitherPresent(CascadingEquality previous, Object a, Object b) {
+		if(previous != null && previous.decided)
+			return previous;
+		if(a == null)
+			return b == null ? CascadingEquality.UNKNOWN : CascadingEquality.UNEQUAL;
+		if(b == null)
+			return CascadingEquality.UNEQUAL;
+		return a.equals(b) ? CascadingEquality.EQUAL : CascadingEquality.UNEQUAL;
+	}
+
+	public static CascadingEquality endEqual(CascadingEquality previous, byte a, byte b) {
+		if(previous != null && previous.decided)
+			return previous;
+		return a ==b ? CascadingEquality.EQUAL : CascadingEquality.UNEQUAL;
+	}
+
+	public static CascadingEquality endEqual(CascadingEquality previous, short a, short b) {
+		if(previous != null && previous.decided)
+			return previous;
+		return a ==b ? CascadingEquality.EQUAL : CascadingEquality.UNEQUAL;
+	}
+
+	public static CascadingEquality endEqual(CascadingEquality previous, int a, int b) {
+		if(previous != null && previous.decided)
+			return previous;
+		return a ==b ? CascadingEquality.EQUAL : CascadingEquality.UNEQUAL;
+	}
+
+	public static CascadingEquality endEqual(CascadingEquality previous, long a, long b) {
+		if(previous != null && previous.decided)
+			return previous;
+		return a ==b ? CascadingEquality.EQUAL : CascadingEquality.UNEQUAL;
+	}
+
+	public static CascadingEquality endEqual(CascadingEquality previous, float a, float b) {
+		if(previous != null && previous.decided)
+			return previous;
+		return a ==b ? CascadingEquality.EQUAL : CascadingEquality.UNEQUAL;
+	}
+
+	public static CascadingEquality endEqual(CascadingEquality previous, double a, double b) {
+		if(previous != null && previous.decided)
+			return previous;
+		return a ==b ? CascadingEquality.EQUAL : CascadingEquality.UNEQUAL;
+	}
+
+	public static CascadingEquality endEqual(CascadingEquality previous, boolean a, boolean b) {
+		if(previous != null && previous.decided)
+			return previous;
+		return a ==b ? CascadingEquality.EQUAL : CascadingEquality.UNEQUAL;
+	}
+
+	public static CascadingEquality endEqual(CascadingEquality previous) {
+		return previous != null && previous.decided ? previous : CascadingEquality.EQUAL;
+	}
+
 }
