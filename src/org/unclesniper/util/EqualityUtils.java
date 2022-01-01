@@ -62,4 +62,74 @@ public final class EqualityUtils {
 		return a.equals(b) ? CascadingEquality.EQUAL : CascadingEquality.UNEQUAL;
 	}
 
+	public static boolean equal(boolean previous, byte a, byte b) {
+		return previous && a == b;
+	}
+
+	public static CascadingEquality equal(CascadingEquality previous, byte a, byte b) {
+		if(previous == CascadingEquality.UNEQUAL)
+			return previous;
+		return a == b ? CascadingEquality.EQUAL : CascadingEquality.UNEQUAL;
+	}
+
+	public static boolean equal(boolean previous, short a, short b) {
+		return previous && a == b;
+	}
+
+	public static CascadingEquality equal(CascadingEquality previous, short a, short b) {
+		if(previous == CascadingEquality.UNEQUAL)
+			return previous;
+		return a == b ? CascadingEquality.EQUAL : CascadingEquality.UNEQUAL;
+	}
+
+	public static boolean equal(boolean previous, int a, int b) {
+		return previous && a == b;
+	}
+
+	public static CascadingEquality equal(CascadingEquality previous, int a, int b) {
+		if(previous == CascadingEquality.UNEQUAL)
+			return previous;
+		return a == b ? CascadingEquality.EQUAL : CascadingEquality.UNEQUAL;
+	}
+
+	public static boolean equal(boolean previous, long a, long b) {
+		return previous && a == b;
+	}
+
+	public static CascadingEquality equal(CascadingEquality previous, long a, long b) {
+		if(previous == CascadingEquality.UNEQUAL)
+			return previous;
+		return a == b ? CascadingEquality.EQUAL : CascadingEquality.UNEQUAL;
+	}
+
+	public static boolean equal(boolean previous, float a, float b) {
+		return previous && a == b;
+	}
+
+	public static CascadingEquality equal(CascadingEquality previous, float a, float b) {
+		if(previous == CascadingEquality.UNEQUAL)
+			return previous;
+		return a == b ? CascadingEquality.EQUAL : CascadingEquality.UNEQUAL;
+	}
+
+	public static boolean equal(boolean previous, double a, double b) {
+		return previous && a == b;
+	}
+
+	public static CascadingEquality equal(CascadingEquality previous, double a, double b) {
+		if(previous == CascadingEquality.UNEQUAL)
+			return previous;
+		return a == b ? CascadingEquality.EQUAL : CascadingEquality.UNEQUAL;
+	}
+
+	public static boolean equal(boolean previous, boolean a, boolean b) {
+		return previous && a == b;
+	}
+
+	public static CascadingEquality equal(CascadingEquality previous, boolean a, boolean b) {
+		if(previous == CascadingEquality.UNEQUAL)
+			return previous;
+		return a == b ? CascadingEquality.EQUAL : CascadingEquality.UNEQUAL;
+	}
+
 }
