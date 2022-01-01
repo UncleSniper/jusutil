@@ -9,36 +9,23 @@ import org.unclesniper.util.Executable;
 import static org.unclesniper.util.ArgUtils.notNull;
 
 public class RegisteringDynamicServiceProvider<
-	InnerUnheldServiceT,
-	InnerUnheldProvisionContextT,
-	InnerHoldableServiceT,
-	InnerHoldableProvisionContextT,
+	UnheldRegistryT,
 	UnheldInstantiationContextT,
-	UnheldInstanceT extends Consumer<? super CombinedDynamicServiceRegistry<
-		InnerUnheldServiceT,
-		InnerUnheldProvisionContextT,
-		InnerHoldableServiceT,
-		InnerHoldableProvisionContextT
-	>>,
+	UnheldInstanceT extends Consumer<? super UnheldRegistryT>,
 	UnheldInstantiationExceptionT extends Throwable,
-	OuterUnheldProvisionContextT,
-	OuterUnheldServiceT extends ContextInstantiableService<
+	UnheldProvisionContextT,
+	UnheldServiceT extends ContextInstantiableService<
 		? super UnheldInstantiationContextT,
 		? extends UnheldInstanceT,
 		? extends UnheldInstantiationExceptionT
 	>,
 	ReleaseExceptionT extends Exception,
+	HoldableRegistryT,
 	HoldableInstantiationContextT,
-	HoldableInstanceT extends Holdable<? extends ReleaseExceptionT>
-		& Consumer<? super CombinedDynamicServiceRegistry<
-			InnerUnheldServiceT,
-			InnerUnheldProvisionContextT,
-			InnerHoldableServiceT,
-			InnerHoldableProvisionContextT
-		>>,
+	HoldableInstanceT extends Holdable<? extends ReleaseExceptionT> & Consumer<? super HoldableRegistryT>,
 	HoldableInstantiationExceptionT extends Throwable,
-	OuterHoldableProvisionContextT,
-	OuterHoldableServiceT extends ContextInstantiableService<
+	HoldableProvisionContextT,
+	HoldableServiceT extends ContextInstantiableService<
 		? super HoldableInstantiationContextT,
 		? extends HoldableInstanceT,
 		? extends HoldableInstantiationExceptionT
@@ -47,19 +34,19 @@ public class RegisteringDynamicServiceProvider<
 	UnheldInstantiationContextT,
 	UnheldInstanceT,
 	UnheldInstantiationExceptionT,
-	OuterUnheldProvisionContextT,
-	OuterUnheldServiceT,
+	UnheldProvisionContextT,
+	UnheldServiceT,
 	ReleaseExceptionT,
 	HoldableInstantiationContextT,
 	HoldableInstanceT,
 	HoldableInstantiationExceptionT,
-	OuterHoldableProvisionContextT,
-	OuterHoldableServiceT
+	HoldableProvisionContextT,
+	HoldableServiceT
 > {
 
 	public RegisteringDynamicServiceProvider(
-		Supplier<? extends Map<? super OuterUnheldProvisionContextT, Object>> unheldContextMapConstructor,
-		Supplier<? extends Map<? super OuterHoldableProvisionContextT, Object>> holdableContextMapConstructor
+		Supplier<? extends Map<? super UnheldProvisionContextT, Object>> unheldContextMapConstructor,
+		Supplier<? extends Map<? super HoldableProvisionContextT, Object>> holdableContextMapConstructor
 	) {
 		super(unheldContextMapConstructor, holdableContextMapConstructor);
 	}
@@ -68,20 +55,17 @@ public class RegisteringDynamicServiceProvider<
 		Executable<? extends ExecuteExceptionT> action,
 		UnheldInstantiationContextT unheldInstantiationContext,
 		HoldableInstantiationContextT holdableInstantiationContext,
-		CombinedDynamicServiceRegistry<
-			InnerUnheldServiceT,
-			InnerUnheldProvisionContextT,
-			InnerHoldableServiceT,
-			InnerHoldableProvisionContextT
-		> registry
+		UnheldRegistryT unheldRegistry,
+		HoldableRegistryT holdableRegistry
 	) throws ExecuteExceptionT, UnheldInstantiationExceptionT, ReleaseExceptionT, HoldableInstantiationExceptionT {
-		notNull(registry, "registry");
+		notNull(unheldRegistry, "unheldRegistry");
+		notNull(holdableRegistry, "holdableRegistry");
 		advance(
 			action,
 			unheldInstantiationContext,
-			(origin, provisionContext, instantiationContext, service) -> service.accept(registry),
+			(origin, provisionContext, instantiationContext, service) -> service.accept(unheldRegistry),
 			holdableInstantiationContext,
-			(origin, provisionContext, instantiationContext, service) -> service.accept(registry)
+			(origin, provisionContext, instantiationContext, service) -> service.accept(holdableRegistry)
 		);
 	}
 
