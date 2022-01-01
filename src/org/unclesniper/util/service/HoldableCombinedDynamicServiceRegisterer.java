@@ -1,7 +1,5 @@
 package org.unclesniper.util.service;
 
-import java.util.function.Consumer;
-
 import static org.unclesniper.util.ArgUtils.notNull;
 
 public class HoldableCombinedDynamicServiceRegisterer<
@@ -11,12 +9,12 @@ public class HoldableCombinedDynamicServiceRegisterer<
 	HoldableProvisionContextT,
 	ServiceT extends HoldableServiceT
 > extends ContextDynamicServiceEntry<ServiceT, HoldableProvisionContextT>
-		implements Consumer<CombinedDynamicServiceRegistry<
+		implements GeneralHoldableCombinedDynamicServiceRegisterer<
 			UnheldServiceT,
 			UnheldProvisionContextT,
 			HoldableServiceT,
 			HoldableProvisionContextT
-		>> {
+		> {
 
 	public HoldableCombinedDynamicServiceRegisterer(Class<ServiceT> type, ServiceT service,
 			HoldableProvisionContextT context) {

@@ -6,7 +6,8 @@ public class HoldableDynamicServiceRegisterer<
 	ReleaseExceptionT extends Exception,
 	UpperBoundT extends Holdable<ReleaseExceptionT>,
 	ServiceT extends UpperBoundT
-> extends DynamicServiceRegisterer<UpperBoundT, ServiceT> implements Holdable<ReleaseExceptionT> {
+> extends DynamicServiceRegisterer<UpperBoundT, ServiceT>
+		implements GeneralHoldableDynamicServiceRegisterer<ReleaseExceptionT, UpperBoundT> {
 
 	public HoldableDynamicServiceRegisterer(Class<ServiceT> type, ServiceT service) {
 		super(type, service);

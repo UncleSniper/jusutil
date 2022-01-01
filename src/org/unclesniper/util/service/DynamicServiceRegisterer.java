@@ -1,11 +1,9 @@
 package org.unclesniper.util.service;
 
-import java.util.function.Consumer;
-
 import static org.unclesniper.util.ArgUtils.notNull;
 
 public class DynamicServiceRegisterer<UpperBoundT, ServiceT extends UpperBoundT>
-		extends DynamicServiceEntry<ServiceT> implements Consumer<DynamicServiceRegistry<UpperBoundT>> {
+		extends DynamicServiceEntry<ServiceT> implements GeneralDynamicServiceRegisterer<UpperBoundT> {
 
 	public DynamicServiceRegisterer(Class<ServiceT> type, ServiceT service) {
 		super(type, service);

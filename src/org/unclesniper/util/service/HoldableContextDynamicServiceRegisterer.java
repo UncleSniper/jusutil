@@ -7,7 +7,8 @@ public class HoldableContextDynamicServiceRegisterer<
 	UpperBoundT extends Holdable<ReleaseExceptionT>,
 	ServiceT extends UpperBoundT,
 	ContextT
-> extends ContextDynamicServiceRegisterer<UpperBoundT, ServiceT, ContextT> implements Holdable<ReleaseExceptionT> {
+> extends ContextDynamicServiceRegisterer<UpperBoundT, ServiceT, ContextT>
+		implements GeneralHoldableContextDynamicServiceRegisterer<ReleaseExceptionT, UpperBoundT, ContextT> {
 
 	public HoldableContextDynamicServiceRegisterer(Class<ServiceT> type, ServiceT service, ContextT context) {
 		super(type, service, context);

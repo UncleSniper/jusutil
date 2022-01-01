@@ -15,7 +15,13 @@ public class HoldableHoldableCombinedDynamicServiceRegisterer<
 	HoldableServiceT,
 	HoldableProvisionContextT,
 	ServiceT
-> implements Holdable<ReleaseExceptionT> {
+> implements GeneralHoldableHoldableCombinedDynamicServiceRegisterer<
+	ReleaseExceptionT,
+	UnheldServiceT,
+	UnheldProvisionContextT,
+	HoldableServiceT,
+	HoldableProvisionContextT
+> {
 
 	public HoldableHoldableCombinedDynamicServiceRegisterer(Class<ServiceT> type, ServiceT service,
 			HoldableProvisionContextT context) {
