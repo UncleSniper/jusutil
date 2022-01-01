@@ -1,5 +1,7 @@
 package org.unclesniper.util.service;
 
+import static org.unclesniper.util.PropertyUtils.requireSet;
+
 public class ContextIgnoringDynamicServiceProvider<UpperBoundT, ContextT, ProvisionExceptionT extends Throwable>
 		implements ContextDynamicServiceProvider<UpperBoundT, ContextT, ProvisionExceptionT> {
 
@@ -25,17 +27,13 @@ public class ContextIgnoringDynamicServiceProvider<UpperBoundT, ContextT, Provis
 	@Override
 	public <ServiceT extends UpperBoundT> ServiceT getService(Class<ServiceT> type, ContextT context)
 			throws ProvisionExceptionT {
-		if(provider == null)
-			throw new IllegalStateException("No inner service provider has been set");
-		return provider.getService(type);
+		return requireSet(provider, "provider", this).getService(type);
 	}
 
 	@Override
 	public <ServiceT extends UpperBoundT> ServiceT requireService(Class<ServiceT> type, ContextT context)
 			throws ProvisionExceptionT {
-		if(provider == null)
-			throw new IllegalStateException("No inner service provider has been set");
-		return provider.requireService(type);
+		return requireSet(provider, "provider", this).requireService(type);
 	}
 
 }
