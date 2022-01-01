@@ -183,43 +183,43 @@ public final class EqualityUtils {
 	public static CascadingEquality endEqual(CascadingEquality previous, byte a, byte b) {
 		if(previous != null && previous.decided)
 			return previous;
-		return a ==b ? CascadingEquality.EQUAL : CascadingEquality.UNEQUAL;
+		return a == b ? CascadingEquality.EQUAL : CascadingEquality.UNEQUAL;
 	}
 
 	public static CascadingEquality endEqual(CascadingEquality previous, short a, short b) {
 		if(previous != null && previous.decided)
 			return previous;
-		return a ==b ? CascadingEquality.EQUAL : CascadingEquality.UNEQUAL;
+		return a == b ? CascadingEquality.EQUAL : CascadingEquality.UNEQUAL;
 	}
 
 	public static CascadingEquality endEqual(CascadingEquality previous, int a, int b) {
 		if(previous != null && previous.decided)
 			return previous;
-		return a ==b ? CascadingEquality.EQUAL : CascadingEquality.UNEQUAL;
+		return a == b ? CascadingEquality.EQUAL : CascadingEquality.UNEQUAL;
 	}
 
 	public static CascadingEquality endEqual(CascadingEquality previous, long a, long b) {
 		if(previous != null && previous.decided)
 			return previous;
-		return a ==b ? CascadingEquality.EQUAL : CascadingEquality.UNEQUAL;
+		return a == b ? CascadingEquality.EQUAL : CascadingEquality.UNEQUAL;
 	}
 
 	public static CascadingEquality endEqual(CascadingEquality previous, float a, float b) {
 		if(previous != null && previous.decided)
 			return previous;
-		return a ==b ? CascadingEquality.EQUAL : CascadingEquality.UNEQUAL;
+		return a == b ? CascadingEquality.EQUAL : CascadingEquality.UNEQUAL;
 	}
 
 	public static CascadingEquality endEqual(CascadingEquality previous, double a, double b) {
 		if(previous != null && previous.decided)
 			return previous;
-		return a ==b ? CascadingEquality.EQUAL : CascadingEquality.UNEQUAL;
+		return a == b ? CascadingEquality.EQUAL : CascadingEquality.UNEQUAL;
 	}
 
 	public static CascadingEquality endEqual(CascadingEquality previous, boolean a, boolean b) {
 		if(previous != null && previous.decided)
 			return previous;
-		return a ==b ? CascadingEquality.EQUAL : CascadingEquality.UNEQUAL;
+		return a == b ? CascadingEquality.EQUAL : CascadingEquality.UNEQUAL;
 	}
 
 	public static CascadingEquality endEqual(CascadingEquality previous) {
