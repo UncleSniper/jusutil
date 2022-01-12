@@ -25,4 +25,13 @@ public final class CollectionUtils {
 		return notNull(map, "map").entrySet().iterator();
 	}
 
+	public static int countNotNull(Iterable<?> collection) {
+		int count = 0;
+		for(Object element : notNull(collection, "collection")) {
+			if(element != null)
+				++count;
+		}
+		return count;
+	}
+
 }
