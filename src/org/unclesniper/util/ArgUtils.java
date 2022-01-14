@@ -204,4 +204,92 @@ public final class ArgUtils {
 		return arg;
 	}
 
+	public static int indexExclusive(int arg, int upperBound, String name) {
+		if(name == null)
+			throw new IllegalArgumentException("Argument 'name' to ArgUtils.indexExclusive() must not be null");
+		if(arg < 0)
+			throw new IndexOutOfBoundsException("Argument '" + name + "' is out of bounds: " + arg + " < 0");
+		if(arg >= upperBound)
+			throw new IndexOutOfBoundsException("Argument '" + name + "' is out of bounds: "
+					+ arg + " >= " + upperBound);
+		return arg;
+	}
+
+	public static int indexInclusive(int arg, int upperBound, String name) {
+		if(name == null)
+			throw new IllegalArgumentException("Argument 'name' to ArgUtils.indexInclusive() must not be null");
+		if(arg < 0)
+			throw new IndexOutOfBoundsException("Argument '" + name + "' is out of bounds: " + arg + " < 0");
+		if(arg > upperBound)
+			throw new IndexOutOfBoundsException("Argument '" + name + "' is out of bounds: "
+					+ arg + " > " + upperBound);
+		return arg;
+	}
+
+	public static short indexExclusive(short arg, short upperBound, String name) {
+		if(name == null)
+			throw new IllegalArgumentException("Argument 'name' to ArgUtils.indexExclusive() must not be null");
+		if(arg < 0)
+			throw new IndexOutOfBoundsException("Argument '" + name + "' is out of bounds: " + arg + " < 0");
+		if(arg >= upperBound)
+			throw new IndexOutOfBoundsException("Argument '" + name + "' is out of bounds: "
+					+ arg + " >= " + upperBound);
+		return arg;
+	}
+
+	public static short indexInclusive(short arg, short upperBound, String name) {
+		if(name == null)
+			throw new IllegalArgumentException("Argument 'name' to ArgUtils.indexInclusive() must not be null");
+		if(arg < 0)
+			throw new IndexOutOfBoundsException("Argument '" + name + "' is out of bounds: " + arg + " < 0");
+		if(arg > upperBound)
+			throw new IndexOutOfBoundsException("Argument '" + name + "' is out of bounds: "
+					+ arg + " > " + upperBound);
+		return arg;
+	}
+
+	public static byte indexExclusive(byte arg, byte upperBound, String name) {
+		if(name == null)
+			throw new IllegalArgumentException("Argument 'name' to ArgUtils.indexExclusive() must not be null");
+		if(arg < 0)
+			throw new IndexOutOfBoundsException("Argument '" + name + "' is out of bounds: " + arg + " < 0");
+		if(arg >= upperBound)
+			throw new IndexOutOfBoundsException("Argument '" + name + "' is out of bounds: "
+					+ arg + " >= " + upperBound);
+		return arg;
+	}
+
+	public static byte indexInclusive(byte arg, byte upperBound, String name) {
+		if(name == null)
+			throw new IllegalArgumentException("Argument 'name' to ArgUtils.indexInclusive() must not be null");
+		if(arg < 0)
+			throw new IndexOutOfBoundsException("Argument '" + name + "' is out of bounds: " + arg + " < 0");
+		if(arg > upperBound)
+			throw new IndexOutOfBoundsException("Argument '" + name + "' is out of bounds: "
+					+ arg + " > " + upperBound);
+		return arg;
+	}
+
+	public static long indexExclusive(long arg, long upperBound, String name) {
+		if(name == null)
+			throw new IllegalArgumentException("Argument 'name' to ArgUtils.indexExclusive() must not be null");
+		if(arg < 0)
+			throw new IndexOutOfBoundsException("Argument '" + name + "' is out of bounds: " + arg + " < 0");
+		if(arg >= upperBound)
+			throw new IndexOutOfBoundsException("Argument '" + name + "' is out of bounds: "
+					+ arg + " >= " + upperBound);
+		return arg;
+	}
+
+	public static long indexInclusive(long arg, long upperBound, String name) {
+		if(name == null)
+			throw new IllegalArgumentException("Argument 'name' to ArgUtils.indexInclusive() must not be null");
+		if(arg < 0)
+			throw new IndexOutOfBoundsException("Argument '" + name + "' is out of bounds: " + arg + " < 0");
+		if(arg > upperBound)
+			throw new IndexOutOfBoundsException("Argument '" + name + "' is out of bounds: "
+					+ arg + " > " + upperBound);
+		return arg;
+	}
+
 }
