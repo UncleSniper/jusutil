@@ -7,7 +7,7 @@ import java.util.Collections;
 import static org.unclesniper.util.ArgUtils.notNull;
 import static org.unclesniper.util.collection.CollectionUtils.copy;
 
-public final class JavaQualifiedName {
+public final class JavaQualifiedName implements PartialStringable {
 
 	private final List<String> segments = new LinkedList<String>();
 
@@ -32,6 +32,7 @@ public final class JavaQualifiedName {
 		return new JavaQualifiedName(parent);
 	}
 
+	@Override
 	public void toString(StringBuilder sink) {
 		notNull(sink, "sink");
 		boolean first = true;
