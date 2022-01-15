@@ -29,4 +29,12 @@ public enum JavaVisibility {
 		return visibility;
 	}
 
+	public static JavaVisibility withDefault(JavaVisibility visibility) {
+		return visibility == null ? JavaVisibility.PACKAGE : visibility;
+	}
+
+	public static JavaVisibility smartDefault(JavaVisibility visibility) {
+		return visibility == null ? JavaVisibility.PUBLIC : visibility;
+	}
+
 }
