@@ -24,4 +24,11 @@ public final class JavaQualifiedName {
 		return Collections.unmodifiableList(segments);
 	}
 
+	public JavaQualifiedName pop() {
+		List<String> parent = segments.subList(0, segments.size());
+		if(parent.isEmpty())
+			throw new IllegalStateException("Cannot pop Java qualified-name: No segments would remain");
+		return new JavaQualifiedName(parent);
+	}
+
 }
