@@ -43,4 +43,12 @@ public final class CollectionUtils {
 			destination.add(element);
 	}
 
+	public static <ElementT> void copy(Iterable<? extends ElementT> source, String sourceName,
+			Collection<? super ElementT> destination) {
+		notNull(source, notNull(sourceName, "sourceName"));
+		notNull(destination, "destination");
+		for(ElementT element : source)
+			destination.add(element);
+	}
+
 }
