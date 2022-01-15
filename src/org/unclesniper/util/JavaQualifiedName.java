@@ -1,0 +1,27 @@
+package org.unclesniper.util;
+
+import java.util.List;
+import java.util.LinkedList;
+import java.util.Collections;
+
+import static org.unclesniper.util.collection.CollectionUtils.copy;
+
+public final class JavaQualifiedName {
+
+	private final List<String> segments = new LinkedList<String>();
+
+	public JavaQualifiedName(Iterable<String> segments) {
+		copy(segments, "segments", this.segments);
+		if(this.segments.isEmpty())
+			throw new IllegalArgumentException("Empty sequence is illegal Java qualified-name");
+	}
+
+	public JavaQualifiedName(String name) {
+		JavaUtils.splitQualifiedName(name, segments::add);
+	}
+
+	public List<String> getSegments() {
+		return Collections.unmodifiableList(segments);
+	}
+
+}
