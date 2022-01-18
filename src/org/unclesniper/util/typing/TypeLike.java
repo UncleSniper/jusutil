@@ -2,6 +2,8 @@ package org.unclesniper.util.typing;
 
 public interface TypeLike extends NameTypeLike {
 
-	Class<?> getType(ClassLoader scope);
+	Class<?> getTypeClass();
+
+	Class<?> getTypeClass(ClassLoader scope);
 
 }

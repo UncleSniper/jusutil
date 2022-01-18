@@ -7,7 +7,7 @@ import java.util.Collections;
 import static org.unclesniper.util.ArgUtils.notNull;
 import static org.unclesniper.util.collection.CollectionUtils.copy;
 
-public final class JavaQualifiedName implements PartialStringable {
+public class JavaQualifiedName implements PartialStringable {
 
 	private final List<String> segments = new LinkedList<String>();
 
@@ -21,11 +21,21 @@ public final class JavaQualifiedName implements PartialStringable {
 		JavaUtils.splitQualifiedName(name, segments::add);
 	}
 
+	protected JavaQualifiedName() {}
+
+	protected JavaQualifiedName(JavaQualifiedName that) {
+		this(notNull(that, "that").segments);
+	}
+
 	public List<String> getSegments() {
 		return Collections.unmodifiableList(segments);
 	}
 
-	public JavaQualifiedName pop() {
+	protected final void addSegment(String segment) {
+		segments.add(notNull(segment, "segment"));
+	}
+
+	public JavaQualifiedName popName() {
 		List<String> parent = segments.subList(0, segments.size());
 		if(parent.isEmpty())
 			throw new IllegalStateException("Cannot pop Java qualified-name: No segments would remain");
@@ -47,9 +57,7 @@ public final class JavaQualifiedName implements PartialStringable {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		toString(builder);
-		return builder.toString();
+		return PartialStringable.toString(this);
 	}
 
 }

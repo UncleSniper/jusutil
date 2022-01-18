@@ -1,11 +1,14 @@
 package org.unclesniper.util.typing;
 
-import org.unclesniper.util.JavaQualifiedName;
+import org.unclesniper.util.JavaRawTypeName;
+import org.unclesniper.util.PartialStringable;
 
-public interface NameTypeLike {
+public interface NameTypeLike extends PartialStringable {
 
-	String getOwnSimpleName();
+	String getTypeSimpleName();
 
-	JavaQualifiedName getOwnQualifiedName();
+	JavaRawTypeName getTypeQualifiedName();
+
+	boolean isArrayType();
 
 }
