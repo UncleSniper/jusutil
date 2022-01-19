@@ -8,6 +8,10 @@ public interface NameType extends GenericTypeName {
 
 	List<InstantiableNameType> getImplementedInterfaceNames();
 
-	List<NameTypeMember> getMemberTypeNamed();
+	List<NameTypeMember> getMemberTypeNames();
+
+	List<NameFieldMember> getFieldNames();
+
+	List<NameMethodMember> getMethodNames();
 
 }

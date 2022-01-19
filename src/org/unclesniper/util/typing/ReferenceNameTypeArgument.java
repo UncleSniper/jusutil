@@ -4,6 +4,6 @@ public interface ReferenceNameTypeArgument extends UnboundedNameTypeArgument {
 
 	String getReferencedParameterName();
 
-	NameTypeParameter getReferencedTypeParameter();
+	NameTypeParameter getReferencedTypeParameterName();
 
 }

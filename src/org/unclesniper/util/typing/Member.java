@@ -18,4 +18,8 @@ public interface Member {
 
 	FieldMember asFieldMember();
 
+	NameMethodMember asNameMethodMember();
+
+	MethodMember asMethodMember();
+
 }
