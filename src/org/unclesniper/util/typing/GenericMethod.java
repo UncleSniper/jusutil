@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface GenericMethod extends MethodLike, GenericMethodName {
 
-	List<TypeParameter> getTypeParameters();
+	List<MethodTypeParameter> getTypeParameters();
 
 }

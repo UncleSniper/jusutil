@@ -1,8 +1,6 @@
 package org.unclesniper.util.typing;
 
-public interface ReferenceNameTypeArgument extends UnboundedNameTypeArgument {
-
-	String getReferencedParameterName();
+public interface ReferenceNameTypeArgument extends UnboundedNameTypeArgument, ReferenceNameTypeArgumentBase {
 
 	NameTypeParameter getReferencedTypeParameterName();
 

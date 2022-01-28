@@ -7,7 +7,7 @@ import java.util.Collections;
 import static org.unclesniper.util.ArgUtils.notNull;
 import static org.unclesniper.util.collection.CollectionUtils.copy;
 
-public class JavaQualifiedName implements PartialStringable {
+public class JavaQualifiedName extends AbstractPartialStringable {
 
 	private final List<String> segments = new LinkedList<String>();
 
@@ -53,11 +53,6 @@ public class JavaQualifiedName implements PartialStringable {
 				sink.append('.');
 			sink.append(segment);
 		}
-	}
-
-	@Override
-	public String toString() {
-		return PartialStringable.toString(this);
 	}
 
 }

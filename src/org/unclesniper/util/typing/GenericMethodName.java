@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface GenericMethodName extends NameMethodLike {
 
-	List<NameTypeParameter> getNameTypeParameters();
+	List<NameMethodTypeParameter> getNameTypeParameters();
 
 	default String getCompleteMethodName() {
 		return this.toString();

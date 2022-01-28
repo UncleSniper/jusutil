@@ -1,9 +1,3 @@
 package org.unclesniper.util.typing;
 
-public interface BoundedNameTypeArgument extends NameTypeArgument {
-
-	boolean isLowerBound();
-
-	NameTypeConstraint getNameBoundConstraint();
-
-}
+public interface BoundedNameTypeArgument extends NameTypeArgument, BoundedNameTypeArgumentBase {}

@@ -1,15 +1,7 @@
 package org.unclesniper.util.typing;
 
-import java.util.List;
-
-public interface TypeParameter extends NameTypeParameter {
+public interface TypeParameter extends NameTypeParameter, TypeParameterBase {
 
 	GenericType getDependingType();
-
-	List<Class<?>> getParameterUpperBoundClasses();
-
-	List<Class<?>> getParameterUpperBoundClasses(ClassLoader scope);
-
-	List<ManifestType> getParameterUpperBounds();
 
 }

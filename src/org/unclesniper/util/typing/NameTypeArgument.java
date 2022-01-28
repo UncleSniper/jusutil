@@ -1,12 +1,8 @@
 package org.unclesniper.util.typing;
 
-import org.unclesniper.util.PartialStringable;
-
-public interface NameTypeArgument extends PartialStringable {
+public interface NameTypeArgument extends NameTypeArgumentBase {
 
 	NameTypeParameter getNameTypeParameter();
-
-	TypeArgumentKind getTypeArgumentKind();
 
 	BoundedNameTypeArgument asBoundedNameTypeArgument();
 
