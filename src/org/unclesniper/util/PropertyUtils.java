@@ -14,4 +14,15 @@ public final class PropertyUtils {
 		return property;
 	}
 
+	public static <T> T returnNotNull(T returnValue, Object that, String methodName) {
+		if(methodName == null)
+			throw new IllegalArgumentException("Argument 'methodName' to PropertyUtils.returnNotNull() "
+					+ "must not be null");
+		if(returnValue == null)
+			throw new IllegalStateException("Method " + methodName + "() on object"
+					+ (that == null ? "" : " of type '" + that.getClass(). getName() + '\'')
+					+ " returned null");
+		return returnValue;
+	}
+
 }
