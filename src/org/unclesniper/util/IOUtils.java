@@ -13,8 +13,11 @@ import java.io.ByteArrayOutputStream;
 import java.nio.charset.StandardCharsets;
 
 import static org.unclesniper.util.ArgUtils.notNull;
+import static org.unclesniper.util.ArgUtils.notNegative;
 
 public final class IOUtils {
+
+	public static final String DEFAULT_INDENT = "    ";
 
 	private IOUtils() {}
 
@@ -107,6 +110,37 @@ public final class IOUtils {
 
 	public static String getResourceAsString(Class<?> clazz, String path, Charset charset) throws IOException {
 		return IOUtils.toString(IOUtils.getResourceAsStream(clazz, path), charset);
+	}
+
+	public static void indent(Writer out, String indentString, int level) throws IOException {
+		notNull(out, "out");
+		notNegative(level, "level");
+		if(indentString == null)
+			indentString = IOUtils.DEFAULT_INDENT;
+		for(int i = 0; i < level; ++i)
+			out.write(indentString);
+	}
+
+	public static void indent(Writer out, int level) throws IOException {
+		IOUtils.indent(out, null, level);
+	}
+
+	public static void eol(Writer out) throws IOException {
+		notNull(out, "out").write(SystemProperties.LINE_SEPARATOR);
+	}
+
+	public static void eolIndent(Writer out, String indentString, int level) throws IOException {
+		notNull(out, "out");
+		notNegative(level, "level");
+		if(indentString == null)
+			indentString = IOUtils.DEFAULT_INDENT;
+		for(int i = 0; i < level; ++i)
+			out.write(indentString);
+		out.write(SystemProperties.LINE_SEPARATOR);
+	}
+
+	public static void eolIndent(Writer out, int level) throws IOException {
+		IOUtils.eolIndent(out, null, level);
 	}
 
 }
