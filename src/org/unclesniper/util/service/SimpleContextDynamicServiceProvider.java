@@ -118,7 +118,7 @@ public class SimpleContextDynamicServiceProvider<UpperBoundT, ContextT, Provisio
 		return removed;
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public Iterable<ContextDynamicServiceEntry<? extends UpperBoundT, ContextT>> entries() {
 		return new CoalescingIterable<
 			Map.Entry<Class<? extends UpperBoundT>, Map<? super ContextT, Object>>,

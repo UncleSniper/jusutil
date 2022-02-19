@@ -64,7 +64,7 @@ public class SimpleDynamicServiceProvider<UpperBoundT, ContextT, ProvisionExcept
 		return services.entrySet();
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	public Iterable<DynamicServiceEntry<? extends UpperBoundT>> entries() {
 		return new MappingIterable<
 			Map.Entry<Class<? extends UpperBoundT>, Object>,
