@@ -3,7 +3,7 @@ package org.unclesniper.util.j8;
 import static org.unclesniper.util.ArgUtils.notNull;
 
 @FunctionalInterface
-public interface ByteToShort extends IOByteToShort {
+public interface ByteToShort extends IOByteToShort, ThrowingByteToShort<RuntimeException> {
 
 	@Override
 	short apply(byte arg);

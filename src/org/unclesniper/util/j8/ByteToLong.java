@@ -3,7 +3,7 @@ package org.unclesniper.util.j8;
 import static org.unclesniper.util.ArgUtils.notNull;
 
 @FunctionalInterface
-public interface ByteToLong extends IOByteToLong {
+public interface ByteToLong extends IOByteToLong, ThrowingByteToLong<RuntimeException> {
 
 	@Override
 	long apply(byte arg);
