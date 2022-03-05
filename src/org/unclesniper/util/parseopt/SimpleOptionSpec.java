@@ -15,12 +15,16 @@ public class SimpleOptionSpec<ConfigT> implements OptionSpec<ConfigT> {
 
 	public SimpleOptionSpec() {}
 
-	public void addShortOption(char name, OptionInfo<? super ConfigT> info) {
+	public void putShortOption(char name, OptionInfo<? super ConfigT> info) {
+		if(name == '\u0000')
+			throw new IllegalArgumentException("Option name cannot be the null character (\\u0000)");
 		shortOptions.put(name, notNull(info, "info"));
 	}
 
-	public void addLongOption(String name, OptionInfo<? super ConfigT> info) {
-		longOptions.put(notNull(name, "name"), notNull(info, "info"));
+	public void putLongOption(String name, OptionInfo<? super ConfigT> info) {
+		if(notNull(name, "name").length() == 0)
+			throw new IllegalArgumentException("Option name cannot be the empty string");
+		longOptions.put(name, notNull(info, "info"));
 	}
 
 	@Override
