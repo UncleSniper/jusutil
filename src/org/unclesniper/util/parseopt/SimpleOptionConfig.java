@@ -175,8 +175,8 @@ public final class SimpleOptionConfig implements OptionConfig {
 		return allowInlineShortArgument;
 	}
 
-	public void setAllowInlineShortArgument(boolean allowInlineShortOption) {
-		this.allowInlineShortArgument = allowInlineShortOption;
+	public void setAllowInlineShortArgument(boolean allowInlineShortArgument) {
+		this.allowInlineShortArgument = allowInlineShortArgument;
 	}
 
 	@Override
@@ -184,8 +184,8 @@ public final class SimpleOptionConfig implements OptionConfig {
 		return allowSeparateShortArgument;
 	}
 
-	public void setAllowSeparateShortArgument(boolean allowSeparateShortOption) {
-		this.allowSeparateShortArgument = allowSeparateShortOption;
+	public void setAllowSeparateShortArgument(boolean allowSeparateShortArgument) {
+		this.allowSeparateShortArgument = allowSeparateShortArgument;
 	}
 
 	@Override
@@ -193,8 +193,8 @@ public final class SimpleOptionConfig implements OptionConfig {
 		return allowInlineLongArgument;
 	}
 
-	public void setAllowInlineLongArgument(boolean allowInlineLongOption) {
-		this.allowInlineLongArgument = allowInlineLongOption;
+	public void setAllowInlineLongArgument(boolean allowInlineLongArgument) {
+		this.allowInlineLongArgument = allowInlineLongArgument;
 	}
 
 	@Override
@@ -202,8 +202,8 @@ public final class SimpleOptionConfig implements OptionConfig {
 		return allowSeparateLongArgument;
 	}
 
-	public void setAllowSeparateLongArgument(boolean allowSeparateLongOption) {
-		this.allowSeparateLongArgument = allowSeparateLongOption;
+	public void setAllowSeparateLongArgument(boolean allowSeparateLongArgument) {
+		this.allowSeparateLongArgument = allowSeparateLongArgument;
 	}
 
 	@Override
