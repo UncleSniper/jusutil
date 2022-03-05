@@ -1,39 +1,41 @@
 package org.unclesniper.util.parseopt;
 
-import org.unclesniper.util.Optionality;
+import java.util.List;
 import org.unclesniper.util.j8.ThrowingObjectSink;
 
 import static org.unclesniper.util.PropertyUtils.requireSet;
 
 public class OptionalArgumentOptionInfo<ConfigT> extends AbstractOptionInfo<ConfigT> {
 
-	private ThrowingObjectSink<? super String, ? extends CommandLineException> action;
+	private SingleArgumentOptionAction<? super ConfigT> action;
 
-	public OptionalArgumentOptionInfo(boolean longOption, String optionInitiator, String optionName,
-			String description, ThrowingObjectSink<? super String, ? extends CommandLineException> action) {
-		super(longOption, optionInitiator, optionName, description);
+	public OptionalArgumentOptionInfo(String description, SingleArgumentOptionAction<? super ConfigT> action) {
+		super(description);
 		this.action = action;
 	}
 
-	public ThrowingObjectSink<? super String, ? extends CommandLineException> getAction() {
+	public SingleArgumentOptionAction<? super ConfigT> getAction() {
 		return action;
 	}
 
-	@Override
-	public Optionality takesArgument() {
-		return Optionality.ALLOW;
+	public void setAction(SingleArgumentOptionAction<? super ConfigT> action) {
+		this.action = action;
 	}
 
 	@Override
-	public void encountered(ConfigT config, boolean longOption, String optionInitiator, String optionName)
-			throws CommandLineException {
-		requireSet(action, "action", this).putObject(null);
+	public int getMinArity() {
+		return 0;
 	}
 
 	@Override
-	public void encountered(ConfigT config, boolean longOption, String optionInitiator, String optionName,
-			String argument) throws CommandLineException {
-		requireSet(action, "action", this).putObject(argument);
+	public int getMaxArity() {
+		return 1;
+	}
+
+	@Override
+	public void encountered(ConfigT config, OptionName option, List<String> arguments) throws CommandLineException {
+		String argument = arguments == null || arguments.isEmpty() ? null : arguments.get(0);
+		requireSet(action, "action", this).perform(config, option, argument);
 	}
 
 }

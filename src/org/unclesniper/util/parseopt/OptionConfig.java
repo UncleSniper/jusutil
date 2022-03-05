@@ -6,7 +6,7 @@ public interface OptionConfig {
 
 	char getShortInitiator();
 
-	char getLongInitiator();
+	String getLongInitiator();
 
 	boolean isAllowShort();
 
@@ -29,5 +29,17 @@ public interface OptionConfig {
 	OptionPrecedence getOptionPrecedence();
 
 	boolean isAllowShortArgumentQueue();
+
+	boolean isNonOptionTerminates();
+
+	boolean isAllowInlineShortArgument();
+
+	boolean isAllowSeparateShortArgument();
+
+	boolean isAllowInlineLongArgument();
+
+	boolean isAllowSeparateLongArgument();
+
+	OptionArgumentPrecedence getOptionArgumentPrecedence();
 
 }

@@ -1,16 +1,14 @@
 package org.unclesniper.util.parseopt;
 
-import org.unclesniper.util.Optionality;
+import java.util.List;
 
 public interface OptionInfo<ConfigT> {
 
-	Optionality takesArgument();
+	int getMinArity();
 
-	void encountered(ConfigT config, boolean longOption, String optionInitiator, String optionName)
-	throws CommandLineException;
+	int getMaxArity();
 
-	void encountered(ConfigT config, boolean longOption, String optionInitiator, String optionName,
-			String argument) throws CommandLineException;
+	void encountered(ConfigT config, OptionName option, List<String> arguments) throws CommandLineException;
 
 	String getDescription();
 

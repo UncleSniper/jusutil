@@ -14,8 +14,8 @@ public class WindowsOptionConfig implements OptionConfig {
 	}
 
 	@Override
-	public char getLongInitiator() {
-		return '/';
+	public String getLongInitiator() {
+		return "/";
 	}
 
 	@Override
@@ -71,6 +71,36 @@ public class WindowsOptionConfig implements OptionConfig {
 	@Override
 	public boolean isAllowShortArgumentQueue() {
 		return false;
+	}
+
+	@Override
+	public boolean isNonOptionTerminates() {
+		return false;
+	}
+
+	@Override
+	public boolean isAllowInlineShortArgument() {
+		return true;
+	}
+
+	@Override
+	public boolean isAllowSeparateShortArgument() {
+		return false;
+	}
+
+	@Override
+	public boolean isAllowInlineLongArgument() {
+		return true;
+	}
+
+	@Override
+	public boolean isAllowSeparateLongArgument() {
+		return false;
+	}
+
+	@Override
+	public OptionArgumentPrecedence getOptionArgumentPrecedence() {
+		return OptionArgumentPrecedence.AMBIGUITY_IS_ERROR;
 	}
 
 }

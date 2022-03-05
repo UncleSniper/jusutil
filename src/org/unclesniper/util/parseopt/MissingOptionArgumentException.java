@@ -6,4 +6,8 @@ public class MissingOptionArgumentException extends OptionException {
 		super("Missing argument to command line option", longOption, optionInitiator, optionName);
 	}
 
+	public MissingOptionArgumentException(OptionName option) {
+		super("Missing argument to command line option", option);
+	}
+
 }

@@ -56,6 +56,10 @@ public final class SystemProperties {
 
 	public static final String USER_DIR = System.getProperty("user.dir");
 
+	public static final boolean IS_WINDOWS = OS_NAME.equals("Windows") || OS_NAME.startsWith("Windows ");
+
+	public static final boolean IS_LINUX = OS_NAME.equals("Linux");
+
 	private SystemProperties() {}
 
 }

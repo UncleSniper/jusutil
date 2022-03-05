@@ -6,7 +6,7 @@ public final class SimpleOptionConfig implements OptionConfig {
 
 	private char shortInitiator = '-';
 
-	private char longInitiator = '-';
+	private String longInitiator = "--";
 
 	private boolean allowShort = true;
 
@@ -30,6 +30,18 @@ public final class SimpleOptionConfig implements OptionConfig {
 
 	private boolean allowShortArgumentQueue;
 
+	private boolean nonOptionTerminates;
+
+	private boolean allowInlineShortArgument;
+
+	private boolean allowSeparateShortArgument;
+
+	private boolean allowInlineLongArgument;
+
+	private boolean allowSeparateLongArgument;
+
+	private OptionArgumentPrecedence optionArgumentPrecedence = OptionArgumentPrecedence.AMBIGUITY_IS_ERROR;
+
 	public SimpleOptionConfig() {}
 
 	@Override
@@ -42,11 +54,11 @@ public final class SimpleOptionConfig implements OptionConfig {
 	}
 
 	@Override
-	public char getLongInitiator() {
+	public String getLongInitiator() {
 		return longInitiator;
 	}
 
-	public void setLongInitiator(char longInitiator) {
+	public void setLongInitiator(String longInitiator) {
 		this.longInitiator = longInitiator;
 	}
 
@@ -147,6 +159,60 @@ public final class SimpleOptionConfig implements OptionConfig {
 
 	public void setAllowShortArgumentQueue(boolean allowShortArgumentQueue) {
 		this.allowShortArgumentQueue = allowShortArgumentQueue;
+	}
+
+	@Override
+	public boolean isNonOptionTerminates() {
+		return nonOptionTerminates;
+	}
+
+	public void setNonOptionTerminates(boolean nonOptionTerminates) {
+		this.nonOptionTerminates = nonOptionTerminates;
+	}
+
+	@Override
+	public boolean isAllowInlineShortArgument() {
+		return allowInlineShortArgument;
+	}
+
+	public void setAllowInlineShortArgument(boolean allowInlineShortOption) {
+		this.allowInlineShortArgument = allowInlineShortOption;
+	}
+
+	@Override
+	public boolean isAllowSeparateShortArgument() {
+		return allowSeparateShortArgument;
+	}
+
+	public void setAllowSeparateShortArgument(boolean allowSeparateShortOption) {
+		this.allowSeparateShortArgument = allowSeparateShortOption;
+	}
+
+	@Override
+	public boolean isAllowInlineLongArgument() {
+		return allowInlineLongArgument;
+	}
+
+	public void setAllowInlineLongArgument(boolean allowInlineLongOption) {
+		this.allowInlineLongArgument = allowInlineLongOption;
+	}
+
+	@Override
+	public boolean isAllowSeparateLongArgument() {
+		return allowSeparateLongArgument;
+	}
+
+	public void setAllowSeparateLongArgument(boolean allowSeparateLongOption) {
+		this.allowSeparateLongArgument = allowSeparateLongOption;
+	}
+
+	@Override
+	public OptionArgumentPrecedence getOptionArgumentPrecedence() {
+		return optionArgumentPrecedence;
+	}
+
+	public void setOptionArgumentPrecedence(OptionArgumentPrecedence optionArgumentPrecedence) {
+		this.optionArgumentPrecedence = optionArgumentPrecedence;
 	}
 
 }
