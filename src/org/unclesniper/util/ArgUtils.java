@@ -660,4 +660,50 @@ public final class ArgUtils {
 					+ start + " > " + end);
 	}
 
+	public static byte safePlus(byte a, byte b, String messageHead) {
+		ArgUtils.notNull(messageHead, "messageHead");
+		int result = a + b;
+		if(result > 127)
+			throw new ArithmeticOverflowException(messageHead + ": " + (int)a + " + " + (int)b + " > 127");
+		else if(result < -128)
+			throw new ArithmeticUnderflowException(messageHead + ": " + (int)a + " + " + (int)b + " < -128");
+		return (byte)result;
+	}
+
+	public static short safePlus(short a, short b, String messageHead) {
+		ArgUtils.notNull(messageHead, "messageHead");
+		int result = a + b;
+		if(result > 32767)
+			throw new ArithmeticOverflowException(messageHead + ": " + (int)a + " + " + (int)b + " > 32767");
+		else if(result < -32768)
+			throw new ArithmeticUnderflowException(messageHead + ": " + (int)a + " + " + (int)b + " < -32768");
+		return (short)result;
+	}
+
+	public static int safePlus(int a, int b, String messageHead) {
+		ArgUtils.notNull(messageHead, "messageHead");
+		if(b >= 0) {
+			if(a >= Integer.MAX_VALUE - b)
+				throw new ArithmeticOverflowException(messageHead + ": " + a + " + " + b + " > " + Integer.MAX_VALUE);
+		}
+		else {
+			if(a < Integer.MIN_VALUE - b)
+				throw new ArithmeticUnderflowException(messageHead + ": " + a + " + " + b + " < " + Integer.MIN_VALUE);
+		}
+		return a + b;
+	}
+
+	public static long safePlus(long a, long b, String messageHead) {
+		ArgUtils.notNull(messageHead, "messageHead");
+		if(b >= 0) {
+			if(a >= Long.MAX_VALUE - b)
+				throw new ArithmeticOverflowException(messageHead + ": " + a + " + " + b + " > " + Long.MAX_VALUE);
+		}
+		else {
+			if(a < Long.MIN_VALUE - b)
+				throw new ArithmeticUnderflowException(messageHead + ": " + a + " + " + b + " < " + Long.MIN_VALUE);
+		}
+		return a + b;
+	}
+
 }
