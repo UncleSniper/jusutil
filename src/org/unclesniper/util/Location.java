@@ -1,6 +1,6 @@
 package org.unclesniper.util;
 
-public class Location implements PartialStringable {
+public class Location implements PartialStringable, Comparable<Location> {
 
 	private String file;
 
@@ -61,6 +61,36 @@ public class Location implements PartialStringable {
 	@Override
 	public String toString() {
 		return PartialStringable.toString(this);
+	}
+
+	@Override
+	public int compareTo(Location other) {
+		boolean noFileHere = file == null || file.length() == 0;
+		boolean noFileThere = other.file == null || other.file.length() == 0;
+		if(noFileHere) {
+			if(!noFileThere)
+				return -1;
+		}
+		else {
+			if(noFileThere)
+				return 1;
+			int fileDiff = file.compareTo(other.file);
+			if(fileDiff != 0)
+				return fileDiff;
+		}
+		if(line <= 0 || other.line <= 0)
+			return 0;
+		if(line < other.line)
+			return -1;
+		if(line > other.line)
+			return 1;
+		if(column <= 0 || other.line <= 0)
+			return 0;
+		if(column < other.column)
+			return -1;
+		if(column > other.column)
+			return 1;
+		return 0;
 	}
 
 }
